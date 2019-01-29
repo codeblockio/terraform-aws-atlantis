@@ -206,3 +206,8 @@ variable "atlantis_gitlab_hostname" {
   description = "Gitlab server hostname, defaults to gitlab.com"
   default     = "gitlab.com"
 }
+
+variable "ssh_private_key_ssm_parameter_name" {
+  description = "An SSH private key to clone external Git modules repositories"
+  default     = ""
+}

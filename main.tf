@@ -17,6 +17,8 @@ locals {
 
   secret_webhook_key = "${local.has_secrets && var.atlantis_gitlab_user_token != "" ? "ATLANTIS_GITLAB_WEBHOOK_SECRET" : "ATLANTIS_GH_WEBHOOK_SECRET"}"
 
+  secret_name_ssh_private_key = "SSH_PRIVATE_KEY"
+
   # Container definitions
   container_definitions = "${var.custom_container_definitions == "" ? module.container_definition.json : var.custom_container_definitions}"
 
@@ -338,6 +340,10 @@ module "container_definition" {
       name      = "${local.secret_webhook_key}"
       valueFrom = "${var.webhook_ssm_parameter_name}"
     },
+    {
+      name      = "${local.secret_name_ssh_private_key}"
+      valueFrom = "${var.ssh_private_key_ssm_parameter_name}"
+    }
   ]
 }
 
